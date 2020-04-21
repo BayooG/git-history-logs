@@ -2,14 +2,22 @@
 
 from pprint import pprint
 from local import  TRILODOCS_PATH
+from repolog import RepoLog
 
-import git
-
-
-r = git.Git(TRILODOCS_PATH)
-repo = git.Repo(TRILODOCS_PATH)
-origins_lst = [i for i in  repo.refs if i.name.startswith('origin')]
-
-
-
-pprint(repo.branches)
+          
+if __name__ == "__main__":
+    repo = RepoLog(TRILODOCS_PATH)
+    
+    print('local branches')
+    pprint(repo.local_branches)
+    
+    print('remote branches')
+    pprint(repo.remote_branches)
+    
+    
+    print('User commits on branch')
+    branch_name = 'develop'
+    author = 'Obay Daba'
+    lst = repo.get_commits_log(branch_name, author)
+    pprint(lst)
+    
